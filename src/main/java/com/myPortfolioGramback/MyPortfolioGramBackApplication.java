@@ -11,7 +11,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @ServletComponentScan
 @SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
-@PropertySource("classpath:/application.properties")
 public class MyPortfolioGramBackApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
