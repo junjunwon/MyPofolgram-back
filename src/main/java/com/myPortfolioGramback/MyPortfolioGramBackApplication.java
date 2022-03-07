@@ -10,7 +10,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @ServletComponentScan
-@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
+@SpringBootApplication
 public class MyPortfolioGramBackApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
