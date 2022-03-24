@@ -44,6 +44,18 @@ i{
     color: #0095f6;
     display: inline-block;
 }
+.buttonBackground {
+    background-color: #0095f6;
+    color: #fff;
+    display: inline-block;
+    width: 80px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    margin: 0px 5px;
+    border-radius: 5px;
+    margin-left: auto;
+}
 .left {
     float: left;
 }
@@ -66,6 +78,52 @@ i{
 }
 .medium{
     font-size: 14px;
+}
+.flexRight{
+    margin-left: auto;
+}
+.bottomModal{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: #fff;
+    width: 100%;
+    border-radius: 10px 10px 0px 0px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+}
+.bottomModal::after{
+    width: 30px;
+    height: 3px;
+    background-color: #8e8e8e;
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 10px;
+    transform: translateX(-50%);
+}
+.bottomModal .modalTitle{
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.bottomModal li{
+    padding: 10px 20px;
+    position: relative;
+}
+.bottomModal li::after{
+    width: 80%;
+    content: '';
+    height: 1px;
+    background-color: #dbdbdb;
+    position: absolute;
+    left: 45px;
+    top: 90%;
+}
+.bottomModal li p{
+    display: inline-block;
+    margin-left: 10px;
 }
 
 /* common-components */
@@ -154,6 +212,51 @@ i{
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+}
+
+/* Activity */
+.activity{
+    padding: 20px 0px;
+}
+.activity i.fa-chevron-left{
+    font-size: 24px;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+.activity .title{
+    font-size: 24px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+.activity .followActivity{
+    padding: 10px 20px;
+}
+.activity .time{
+    padding: 10px 20px;
+    font-weight: bold;
+}
+.activity .item{
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+}
+.activity .item img{
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.activity .item .text{
+    font-size: 16px;
+    max-width: 70%;
+}
+.activity .item .text b{
+    font-weight: bold;
+}
+.activity .item .date{
+    font-size: 14px;
+    margin-left: 5px;
+    color: #8e8e8e;
 }
 
 /* Footer */
@@ -336,7 +439,7 @@ i{
     text-align: center;
 }
 .mypage .post {
-    width: 32.8%;
+    width: 33.3%;
     height: 246px;
     margin-top: -4px;
     display: inline-block;
