@@ -2,7 +2,13 @@
     font-family: "NotoSans";
     src: url("../font/NotoSansKR-Regular.otf");
 }
+html{
+    max-width: 600px;
+    margin: 0 auto;
+}
 body {
+    max-width: 600px;
+    margin: 0 auto;
     font-family: "NotoSans";
     padding: 0;
     margin: 0;
@@ -33,6 +39,8 @@ input:focus {
 ul {
     margin: 0;
     padding: 0;
+    list-style:none;
+    padding-left:0px;
 }
 i{
     color: #333;
@@ -43,6 +51,7 @@ i{
 .button {
     color: #0095f6;
     display: inline-block;
+    text-align: center;
 }
 .buttonBackground {
     background-color: #0095f6;
@@ -83,15 +92,14 @@ i{
     margin-left: auto;
 }
 .bottomModal{
-    position: fixed;
-    bottom: 0;
+    position: relative;
     left: 0;
     background-color: #fff;
     width: 100%;
     border-radius: 10px 10px 0px 0px;
     padding-top: 20px;
-    padding-bottom: 20px;
-    margin-bottom: 40px;
+    bottom: 270px;
+    height: 270px;
 }
 .bottomModal::after{
     width: 30px;
@@ -261,6 +269,8 @@ i{
 
 /* Footer */
 .footer {
+    max-width: 600px;
+    margin: 0 auto;
     padding: 10px 20px;
     border-top: 1px solid #dbdbdb;
     position: fixed;
@@ -402,6 +412,9 @@ i{
 }
 
 /* Mypage */
+.mypage{
+    position: relative;
+}
 .mypage .mypageHeader {
     display: flex;
     align-items: baseline;
@@ -498,6 +511,7 @@ i{
     border: 1px solid #000;
     display: inline-block;
     padding: 2px 25px;
+    width: 50px;
 }
 
 /* Modify */
