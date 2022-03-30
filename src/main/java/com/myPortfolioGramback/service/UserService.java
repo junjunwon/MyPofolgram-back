@@ -26,7 +26,7 @@ public class UserService {
      * @since 2022.03.23
      * @return Success
      */
-    public Success getProfileInfo() {
+    public Success getProfileInfo(String userId) {
 
         Success success = new Success(false);
 
@@ -37,7 +37,7 @@ public class UserService {
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
 
-        success.setResult(userInfoDtos);
+        success.setResult(userInfoDtos.get(0));
         success.setSuccess(true);
 
         return success;
@@ -45,6 +45,12 @@ public class UserService {
 
     public UserInfoDto convertToDto(UserInfo userInfo) {
         UserInfoDto userInfoDto = modelMapper.map(userInfo, UserInfoDto.class);
+        //dummy data
+        userInfoDto.setWebsite("http://naver.com");
+        userInfoDto.setIntroduction("Hi this is wonjunho");
+        userInfoDto.setFollow(15000);
+        userInfoDto.setFollower(500000);
+        userInfoDto.setCountBoard(67);
         return userInfoDto;
     }
 }

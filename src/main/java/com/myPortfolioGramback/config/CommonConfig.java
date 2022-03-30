@@ -38,8 +38,8 @@ public class CommonConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**")
-                .addResourceLocations("classpath:/static/")
-                .setCacheControl(CacheControl.maxAge(10, TimeUnit.MINUTES));
+                .addResourceLocations("classpath:/static/");
+//                .setCacheControl(CacheControl.maxAge(10, TimeUnit.MINUTES));
     }
 
     /**
@@ -91,17 +91,17 @@ public class CommonConfig implements WebMvcConfigurer {
 //        };
 //    }
 //
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("*")
-                //.allowedOrigins("http://localhost:8080")
-                //.allowedMethods("*")
-                //.allowedMethods("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
-                .allowedMethods("POST", "GET")
-                .allowedHeaders("*")
-                .exposedHeaders("authorization");
-    }
+//    @Override
+//    public void addCorsMappings(CorsRegistry registry) {
+//        registry.addMapping("/**")
+//                .allowedOrigins("*")
+//                //.allowedOrigins("http://localhost:8080")
+//                //.allowedMethods("*")
+//                //.allowedMethods("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
+//                .allowedMethods("POST", "GET")
+//                .allowedHeaders("*")
+//                .exposedHeaders("authorization");
+//    }
 
     @Bean
     public ModelMapper modelMapper() {

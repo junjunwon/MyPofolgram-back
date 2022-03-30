@@ -16,4 +16,11 @@ public class UserInfoDto {
     private String email;
     private String mobile;
     private LocalDate createDate;
+
+    private String website;
+    private String introduction;
+    private int follower;
+    private int follow;
+    private int countBoard;
+
 }
