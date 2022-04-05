@@ -1,41 +1,42 @@
 package com.myPortfolioGramback.domain.user;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Setter @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name="UserInfo")
-public class UserInfo {
-
+@Table(name="Post")
+public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id", columnDefinition = "bigint")
+    @Column(name = "id", columnDefinition = "bigint")
     private int id;
 
-    @Column(name="userId")
-    private String userId;
+    @ManyToOne
+    @JoinColumn(name = "userinfo_id")
+    private UserInfo userinfo;
 
-    @Column(name="nickName")
-    private String nickName;
+    @Column(name="content", columnDefinition = "VARCHAR(2000)")
+    private String content;
 
-    @Column(name="password")
-    private String password;
+    @OneToMany
+    @JoinColumn(name = "Photos_id")
+    private Set<Photos> photoId;
 
-    @Column(name="email", columnDefinition = "VARCHAR (100)")
-    private String email;
-
-    @Column(name="mobile",columnDefinition = "VARCHAR (50)")
-    private String mobile;
+    @OneToMany
+    @JoinColumn(name = "Locations_id")
+    private Set<Locations> locationId;
 
     @Column(name = "createDate")
     @CreationTimestamp
@@ -48,20 +49,13 @@ public class UserInfo {
     @Column(name = "removeDate")
     private LocalDateTime removeDate;
 
+    @OneToMany(mappedBy = "post")
+    private List<PostHashTag> postHashTags = new ArrayList<>();
+
     @OneToMany
     @JoinColumn(name = "id")
     private List<Comments> comments = new ArrayList<>();
 
-    @Column(name="userImgUrl", columnDefinition = "VARCHAR (255)")
-    private String userImgUrl;
-
-    @OneToOne
-    @JoinColumn(name = "settingId")
-    private Settings settings;
-
-    @OneToMany(mappedBy = "userInfo")
+    @OneToMany(mappedBy = "post")
     private List<Likes> likes = new ArrayList<>();
-
-    @OneToMany(mappedBy = "userInfo")
-    private List<Following> followings = new ArrayList<>();
 }
