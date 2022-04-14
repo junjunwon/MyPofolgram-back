@@ -18,9 +18,9 @@ import java.util.List;
 public class UserInfo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id", columnDefinition = "bigint")
-    private int id;
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @Column(name="userId")
     private String userId;
@@ -36,6 +36,9 @@ public class UserInfo {
 
     @Column(name="mobile",columnDefinition = "VARCHAR (50)")
     private String mobile;
+
+    @Column(name="intro",columnDefinition = "VARCHAR (2000)")
+    private String intro;
 
     @Column(name = "createDate")
     @CreationTimestamp
@@ -62,6 +65,6 @@ public class UserInfo {
     @OneToMany(mappedBy = "userInfo")
     private List<Likes> likes = new ArrayList<>();
 
-    @OneToMany(mappedBy = "userInfo")
-    private List<Following> followings = new ArrayList<>();
+    @OneToMany(mappedBy = "userInfo", fetch = FetchType.EAGER)
+    private List<Follow> follows = new ArrayList<>();
 }
