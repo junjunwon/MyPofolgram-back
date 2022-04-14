@@ -52,6 +52,11 @@ i{
 }
 
 /* common */
+.flexbox{
+    display: flex;
+    justify-content: space-between;
+    justify-items: center;
+}
 .button {
     color: #0095f6;
     display: inline-block;
@@ -98,15 +103,27 @@ i{
 .flexRight{
     margin-left: auto;
 }
-.bottomModal{
-    position: relative;
+.modalWrap{
+    background-color: rgba(0, 0, 0, 0.5);
     left: 0;
-    background-color: #fff;
+    bottom: 40px;
+    z-index: 10;
+    top: inherit;
     width: 100%;
+    height: 100%;
+    position: fixed;
+}
+.bottomModal{
+    /* position: relative; */
+    position: absolute;
+    left: 50%;
+    background-color: #fff;
+    width: 600px;
     border-radius: 10px 10px 0px 0px;
     padding-top: 20px;
     bottom: 0px;
     height: 270px;
+    transform: translateX(-50%);
 }
 .bottomModal::after{
     width: 30px;
@@ -173,11 +190,21 @@ i{
     left: 20px;
     top: 15px;
 }
+.topBack i.right{
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    left: inherit;
+}
 .topWithButton {
     display: flex;
     justify-content: space-between;
     padding: 10px 20px;
     border-bottom: 1px solid #dbdbdb;
+}
+.hashtag {
+    font-size: 14px;
+    color: #00376b;
 }
 
 /* Header */
@@ -287,6 +314,7 @@ i{
     display: flex;
     justify-content: space-between;
     background-color: #fff;
+    z-index: 10;
 }
 .footer i {
     font-size: 22px;
@@ -305,6 +333,9 @@ i{
 .storyList .story {
     display: inline-block;
     padding: 5px;
+}
+.storyList .story.circle{
+    border: 2px solid orange;
 }
 .storyList .story img {
     width: 66px;
@@ -339,9 +370,17 @@ i{
 .post .top i {
     float: right;
 }
-.post .photoList img {
+.post .photoList .imagesArea {
     /* 수정필요 - pc화면 생각할 것 */
-    max-width: 200px;
+    /* max-width: 200px; */
+    margin-bottom: 10px;
+    box-shadow: none;
+}
+.post .photoList .imageArea{
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
 }
 .post .bottom {
     padding: 0px 10px;
@@ -356,11 +395,6 @@ i{
     font-size: 16px;
     font-weight: bold;
     margin-right: 5px;
-}
-.post .content {
-}
-.post .hashtag {
-    color: #00376b;
 }
 .post .comment {
     color: #8e8e8e;
@@ -382,7 +416,58 @@ i{
 .post .commentArea .button {
     float: right;
 }
+#postList{
+    margin-bottom: 60px;
+}
+#postList .bottomModal div{
+    border: 1px solid #8e8e8e;
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+}
+#postList .bottomModal{
+    padding: 20px;
+    text-align: center;
+}
+#postList .bottomModal .flexbox{
+    border: none;
+    padding: 0px;
+}
+#postList .bottomModal .flexbox div{
+    width: 26%;
+}
+#postList .bottomModal li:after{
+    width: 100%;
+    left: 0px;
+}
+#postList .bottomModal li:last-child:after{
+    content: none;
+}
 
+/* Comment */
+#commentList .content, #commentList .comment{
+    display: flex;
+    margin-bottom: 10px;
+}
+#commentList .content{
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dbdbdb;
+}
+#commentList img{
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+#commentList .time {
+    color: #8e8e8e;
+    font-size: 12px;
+}
+#commentList .area b{
+    font-weight: bold;
+    margin-right: 5px;
+}
+ 
 /* Search */
 .searchForm{
     padding: 10px 20px;
@@ -596,3 +681,106 @@ i{
         flex-basis: 43%;
     }
 }
+
+/* modal jh.won */
+.modal-mask {
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: table;
+    transition: opacity 0.3s ease;
+  }
+  
+  .modal-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  
+  .modal-container {
+    width: 550px;
+    height:600px;
+    margin: 0px auto;
+    /* padding: 20px 30px; */
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+    transition: all 0.3s ease;
+  }
+  .confirm-modal-container {
+    width: 400px;
+    height:200px;
+    margin: 0px auto;
+    /* padding: 20px 30px; */
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+    transition: all 0.3s ease;
+  }
+  .confirm-modal-body {
+    text-align: center;
+    margin: 20px 0;
+    margin-top: 60px;
+  }
+  .modal-header h3 {
+      font-size:medium;
+      font-weight: bolder;
+    color: #000;
+    text-align: center;
+  }
+  .modal-body {
+    text-align: center;
+    margin: 20px 0;
+    margin-top: 200px;
+  }
+  .modal-footer {
+    text-align: center;
+  }
+  .modal-default-button {
+    float: right;
+  }
+
+  /* button */
+  a.button {
+    /* display: block; */
+    position: relative;
+    float: none;
+    width: 120px;
+    padding: 0;
+    margin: 10px 20px 10px 0;
+    font-weight: 600;
+    text-align: center;
+    line-height: 30px;
+    color: #000;
+    border-radius: 5px;
+    transition: all 0.2s ;
+  }
+  .btnLightBlue {
+    background: #5DC8CD;
+  }
+  .btnPush:hover {
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+  .btnLightBlue.btnPush {
+    box-shadow: 0px 5px 0px 0px #1E8185;
+  }
+  .btnLightBlue.btnPush:hover {
+    box-shadow: 0px 0px 0px 0px #1E8185;
+  }
+  .btnLightBlue.btnBorder {
+    box-shadow: 0px 0px 0px 0px #01939A;
+  }
+  
+  .btnLightBlue.btnBorder:hover {
+    box-shadow: 0px 0px 0px 5px #01939A;
+  }
+  .btnLightBlue.btnFloat:before {
+    background: #5DC8CD;
+  }
+  .topWithButton.bold {
+      text-align: center;
+  }
