@@ -7,13 +7,26 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter @Setter
 public class UserInfoDto {
+    private Long id;
     private String userId;
     private String password;
     private String userName;
     private String email;
     private String mobile;
-    private LocalDate createDate;
+    private LocalDateTime createDate;
+
+
+    private String website;
+    private String introduction;
+    private int follower;
+    private int follow;
+    private int countBoard;
+
+    private List<Follow> follows = new ArrayList<>();
 }

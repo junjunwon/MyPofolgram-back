@@ -1,6 +1,7 @@
 package com.myPortfolioGramback.service;
 
 import com.myPortfolioGramback.common.Success;
+import com.myPortfolioGramback.domain.user.SetUser;
 import com.myPortfolioGramback.domain.user.UserInfo;
 import com.myPortfolioGramback.domain.user.UserInfoDto;
 import com.myPortfolioGramback.domain.user.UserRepository;
@@ -9,6 +10,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -46,5 +50,25 @@ public class UserService {
     public UserInfoDto convertToDto(UserInfo userInfo) {
         UserInfoDto userInfoDto = modelMapper.map(userInfo, UserInfoDto.class);
         return userInfoDto;
+    }
+
+    public Success setProfile(SetUser setUser) {
+
+        Success success = new Success(true);
+
+        Optional<UserInfo> userInfoOptional = userRepository.findById(Long.parseLong(setUser.getSystemId()));
+        UserInfo userInfo = userInfoOptional.orElseThrow(() -> new NoSuchElementException());
+
+        if(Objects.equals(setUser.getType(), "name")) {
+            userInfo.setUserId(setUser.getValue());
+        } else if (Objects.equals(setUser.getType(), "nickName")) {
+            userInfo.setNickName(setUser.getValue());
+        } else if (Objects.equals(setUser.getType(), "intro")){
+            userInfo.setIntro(setUser.getValue());
+        }
+
+        userRepository.save(userInfo);
+
+        return success;
     }
 }
