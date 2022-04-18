@@ -31,7 +31,6 @@ public class UserController {
             @RequestBody SetUser setUser,
             HttpServletRequest request
     ) {
-//        Success success = userService.setProfile(type, value, systemId);
         Success success = userService.setProfile(setUser);
 
         return success;
