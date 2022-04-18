@@ -1,4 +1,4 @@
-package com.myPortfolioGramback.domain.user;
+package com.myPortfolioGramback.domain.user.userInfo;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -28,5 +28,5 @@ public class UserInfoDto {
     private int follow;
     private int countBoard;
 
-    private List<Follow> follows = new ArrayList<>();
+//    private List<Follow> follows = new ArrayList<>();
 }

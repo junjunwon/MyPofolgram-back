@@ -1,9 +1,8 @@
 package com.myPortfolioGramback.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.myPortfolioGramback.common.Success;
-import com.myPortfolioGramback.domain.user.SetUser;
-import com.myPortfolioGramback.domain.user.UserInfo;
-import com.myPortfolioGramback.domain.user.UserInfoDto;
+import com.myPortfolioGramback.domain.user.userInfo.SetUser;
 import com.myPortfolioGramback.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +19,7 @@ public class UserController {
     @GetMapping("/getProfileInfo")
     public @ResponseBody Success getProfileInfo(
             HttpServletRequest request,
-            @RequestParam("userId") String userId) {
+            @RequestParam("userId") String userId) throws JsonProcessingException {
 
         Success success = userService.getProfileInfo(userId);
 
@@ -34,6 +33,16 @@ public class UserController {
     ) {
 //        Success success = userService.setProfile(type, value, systemId);
         Success success = userService.setProfile(setUser);
+
+        return success;
+    }
+
+    @GetMapping("/getFollowList")
+    public @ResponseBody Success getFollowList(
+            HttpServletRequest request,
+            @RequestParam("userId") String userId
+    ) {
+        Success success = userService.getFollowList(userId);
 
         return success;
     }

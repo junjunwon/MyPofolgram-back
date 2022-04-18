@@ -1,29 +1,31 @@
-package com.myPortfolioGramback.domain.user;
+package com.myPortfolioGramback.domain.user.follow;
 
+import com.myPortfolioGramback.domain.user.userInfo.UserInfo;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Setter
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name="Follower")
-public class Follower {
+@Table(name="Following")
+public class Following {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id", columnDefinition = "bigint")
     private int id;
 
-    @Column(name="name")
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private UserInfo userInfo;
 
-    @OneToMany(mappedBy = "follower")
-    private List<Following> followings = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "follwerId")
+    private Follower follower;
+
 }

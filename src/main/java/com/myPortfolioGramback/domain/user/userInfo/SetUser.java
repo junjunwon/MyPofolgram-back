@@ -1,4 +1,4 @@
-package com.myPortfolioGramback.domain.user;
+package com.myPortfolioGramback.domain.user.userInfo;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,5 +1,6 @@
-package com.myPortfolioGramback.domain.user;
+package com.myPortfolioGramback.domain.user.follow;
 
+import com.myPortfolioGramback.domain.user.userInfo.UserInfo;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,7 @@ public class Follow {
     @Column(name="id", columnDefinition = "bigint")
     private int id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
     private UserInfo userInfo;
 
