@@ -1,5 +1,6 @@
-package com.myPortfolioGramback.domain.user;
+package com.myPortfolioGramback.domain.user.post;
 
+import com.myPortfolioGramback.domain.user.*;
 import com.myPortfolioGramback.domain.user.userInfo.UserInfo;
 import lombok.AccessLevel;
 import lombok.Getter;
