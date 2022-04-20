@@ -24,9 +24,9 @@ public class UserInfoDto {
 
     private String website;
     private String introduction;
-    private int follower;
-    private int follow;
-    private int countBoard;
+    private long followerCnt;
+    private long followeeCnt;
+    private long postCnt;
 
 //    private List<Follow> follows = new ArrayList<>();
 }

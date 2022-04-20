@@ -3,6 +3,7 @@ package com.myPortfolioGramback.domain.user.userInfo;
 import com.myPortfolioGramback.domain.user.Likes;
 import com.myPortfolioGramback.domain.user.Settings;
 import com.myPortfolioGramback.domain.user.follow.Follow;
+import com.myPortfolioGramback.domain.user.post.Post;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -68,4 +69,7 @@ public class UserInfo {
 
     @OneToMany(mappedBy = "userInfo", cascade = CascadeType.ALL)
     private List<Follow> follows = new ArrayList<>();
+
+    @OneToMany(mappedBy = "userInfo", cascade = CascadeType.ALL)
+    private List<Post> posts = new ArrayList<>();
 }

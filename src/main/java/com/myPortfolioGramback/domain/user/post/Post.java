@@ -25,16 +25,16 @@ public class Post {
     @Column(name = "id", columnDefinition = "bigint")
     private int id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userinfo_id")
-    private UserInfo userinfo;
+    private UserInfo userInfo;
 
     @Column(name="content", columnDefinition = "VARCHAR(2000)")
     private String content;
 
-    @OneToMany
-    @JoinColumn(name = "Photos_id")
-    private Set<Photos> photoId;
+//    @OneToMany
+//    @JoinColumn(name = "Photos_id")
+//    private Set<Photos> photoId;
 
     @OneToMany
     @JoinColumn(name = "Locations_id")
@@ -58,6 +58,9 @@ public class Post {
     @JoinColumn(name = "id")
     private List<Comments> comments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Likes> likes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Photos> photos = new ArrayList<>();
 }

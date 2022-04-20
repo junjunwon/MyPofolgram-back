@@ -4,6 +4,7 @@ import com.myPortfolioGramback.common.Success;
 import com.myPortfolioGramback.domain.user.follow.Follow;
 import com.myPortfolioGramback.domain.user.follow.FollowDto;
 import com.myPortfolioGramback.domain.user.follow.FollowRepository;
+import com.myPortfolioGramback.domain.user.post.Post;
 import com.myPortfolioGramback.domain.user.userInfo.SetUser;
 import com.myPortfolioGramback.domain.user.userInfo.UserInfo;
 import com.myPortfolioGramback.domain.user.userInfo.UserInfoDto;
@@ -38,22 +39,33 @@ public class UserService {
         Success success = new Success(false);
 
         UserInfo userInfo = userRepository.findByUserId(userId);
+        long followerCnt = 0;
+        long followeeCnt = 0;
+        long postCnt = userInfo.getPosts().size();
+        for(Follow follow : userInfo.getFollows()) {
+            if(Objects.equals(userId, follow.getFollower())) {
+                followerCnt ++;
+            }
+            if(Objects.equals(userId, follow.getFollowingId())) {
+                followeeCnt++;
+            }
+        }
 
-        UserInfoDto userInfoDto = convertToDto(userInfo);
+        UserInfoDto userInfoDto = convertToDto(userInfo, followerCnt, followeeCnt, postCnt);
         success.setResult(userInfoDto);
         success.setSuccess(true);
 
         return success;
     }
 
-    public UserInfoDto convertToDto(UserInfo userInfo) {
+    public UserInfoDto convertToDto(UserInfo userInfo, long followerCnt, long followeeCnt, long postCnt) {
         UserInfoDto userInfoDto = modelMapper.map(userInfo, UserInfoDto.class);
         //dummy data
         userInfoDto.setWebsite("http://naver.com");
         userInfoDto.setIntroduction("Hi this is wonjunho");
-        userInfoDto.setFollow(15000);
-        userInfoDto.setFollower(500000);
-        userInfoDto.setCountBoard(67);
+        userInfoDto.setFollowerCnt(followerCnt);
+        userInfoDto.setFolloweeCnt(followeeCnt);
+        userInfoDto.setPostCnt(postCnt);
         return userInfoDto;
     }
 

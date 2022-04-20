@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/post")
 public class PostController {
 
-    PostService postService;
+    private final PostService postService;
 
     @GetMapping("/getPostList")
     public @ResponseBody Success getPostList(
