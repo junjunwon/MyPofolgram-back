@@ -22,7 +22,7 @@ public class Photos {
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "postId")
+    @JoinColumn(name = "postid")
     private Post post;
 
     @Column(name="fileName", columnDefinition = "VARCHAR (255)")

@@ -114,8 +114,7 @@ i{
     position: fixed;
 }
 .bottomModal{
-    /* position: relative; */
-    position: absolute;
+    position: fixed;
     left: 50%;
     background-color: #fff;
     width: 600px;
