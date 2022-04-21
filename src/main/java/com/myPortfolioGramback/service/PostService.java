@@ -31,7 +31,7 @@ public class PostService {
         PostDto postDto = new PostDto();
         for(Post post : postList) {
             postDto.setPostId(post.getId());
-            postDto.setImgUrl(post.getPhotos().get(0).getFileName());
+//            postDto.setImgUrl(post.getPhotos().get(0).getFileName());
         }
         return postDto;
     }
