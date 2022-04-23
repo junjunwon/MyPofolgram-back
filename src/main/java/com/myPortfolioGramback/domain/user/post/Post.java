@@ -12,6 +12,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -51,16 +52,16 @@ public class Post {
     @Column(name = "removeDate")
     private LocalDateTime removeDate;
 
-    @OneToMany(mappedBy = "post")
-    private List<PostHashTag> postHashTags = new ArrayList<>();
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<PostHashTag> postHashTags = new HashSet<PostHashTag>();
 
-    @OneToMany
-    @JoinColumn(name = "id")
-    private List<Comments> comments = new ArrayList<>();
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "id", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Comments> comments = new HashSet<Comments>();
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<Likes> likes = new ArrayList<>();
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Likes> likes = new HashSet<Likes>();
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<Photos> photos = new ArrayList<>();
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Photos> photos = new HashSet<Photos>();
 }

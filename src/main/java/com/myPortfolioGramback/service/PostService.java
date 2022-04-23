@@ -1,12 +1,15 @@
 package com.myPortfolioGramback.service;
 
 import com.myPortfolioGramback.common.Success;
+import com.myPortfolioGramback.domain.user.Photos;
 import com.myPortfolioGramback.domain.user.post.Post;
 import com.myPortfolioGramback.domain.user.post.PostDto;
 import com.myPortfolioGramback.domain.user.post.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -20,19 +23,24 @@ public class PostService {
 
         List<Post> postList = postRepository.findAll();
 
-        PostDto postDto = convertToPostDTO(postList);
-        success.setResult(postDto);
+        List<PostDto> postDtoList = convertToPostDTO(postList);
+        success.setResult(postDtoList);
 
         return success;
     }
 
-    private PostDto convertToPostDTO(List<Post> postList) {
+    private List<PostDto> convertToPostDTO(List<Post> postList) {
 
-        PostDto postDto = new PostDto();
+        List<PostDto> postDtoList = new ArrayList<>();
         for(Post post : postList) {
+            PostDto postDto = new PostDto();
             postDto.setPostId(post.getId());
-//            postDto.setImgUrl(post.getPhotos().get(0).getFileName());
+            Iterator<Photos> photos = post.getPhotos().iterator();
+            postDto.setImgUrl(photos.next().getFileName());
+
+            postDtoList.add(postDto);
         }
-        return postDto;
+
+        return postDtoList;
     }
 }
