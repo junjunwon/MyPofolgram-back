@@ -547,6 +547,7 @@ i{
 }
 .mypage .top div {
     flex-basis: 30%;
+    cursor: pointer;
 }
 .mypage .top div:first-child {
     flex-basis: 40%;
@@ -563,6 +564,7 @@ i{
     border-radius: 5px;
     padding: 5px;
     text-align: center;
+    cursor: pointer;
 }
 .mypage .post {
     width: 33.3%;
@@ -586,6 +588,7 @@ i{
     display: flex;
     margin-bottom: 20px;
     border-bottom: 1px solid #dbdbdb;
+    cursor: pointer;
 }
 .follow .followMenu li {
     width: 50%;
