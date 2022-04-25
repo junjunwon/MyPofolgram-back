@@ -1,5 +1,5 @@
 server:
-  port : 8080
+  port : 8081
 
 spring :
   datasource:
@@ -21,7 +21,14 @@ spring :
     pathmatch:
       matching-strategy: ant_path_matcher
 
+#jwt:
+#  header : Authorization
+#  secret : amh3b24td2lsbC1iZS10aGUtYmVzdC1wcm9ncmFtbWVyLWluLXRoZS13b3JsZC13YXRjaC1teS1qb3VybmV5LXRoaXMtaXMtYWJvdXQtbXktZmlyc3RTZWNyZXRLZXkK # 특정 문자열을 Base64로 인코딩한 값
+#  token-validity-in-seconds : 80400 # token expired time
+
 jwt:
-  header : Authorization
-  secret : amh3b24td2lsbC1iZS10aGUtYmVzdC1wcm9ncmFtbWVyLWluLXRoZS13b3JsZC13YXRjaC1teS1qb3VybmV5LXRoaXMtaXMtYWJvdXQtbXktZmlyc3RTZWNyZXRLZXkK # 특정 문자열을 Base64로 인코딩한 값
-  token-validity-in-seconds : 80400 # token expired time
+  header: Authorization
+  #HS512 알고리즘을 사용할 것이기 때문에 512bit, 즉 64byte 이상의 secret key를 사용해야 한다.
+  #echo 'silvernine-tech-spring-boot-jwt-tutorial-secret-silvernine-tech-spring-boot-jwt-tutorial-secret'|base64
+  secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
+  token-validity-in-seconds: 86400

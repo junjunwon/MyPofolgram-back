@@ -12,6 +12,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Array;
@@ -33,22 +34,20 @@ public class TokenProvider implements InitializingBean {
     private static final String AUTHORITIES_KEY = "auth";
 
     private final String secret;
-
     private final long tokenValidityInMilliseconds;
 
     private Key key;
 
+
     public TokenProvider(
             @Value("${jwt.secret}") String secret,
-            @Value("${jwt.token-validity-in-seconds}") long tokenValidityInMilliseconds
-    ) {
-        this.tokenValidityInMilliseconds = tokenValidityInMilliseconds * 1000;
+            @Value("${jwt.token-validity-in-seconds}") long tokenValidityInSeconds) {
         this.secret = secret;
+        this.tokenValidityInMilliseconds = tokenValidityInSeconds * 1000;
     }
 
     @Override
-    public void afterPropertiesSet() throws Exception {
-        //Bean이 생성이 되고 주입을 받은 뒤 secret값을 base64 decode해서 key변수에 할당하기 위해 오버라이딩함.
+    public void afterPropertiesSet() {
         byte[] keyBytes = Decoders.BASE64.decode(secret);
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
@@ -58,11 +57,9 @@ public class TokenProvider implements InitializingBean {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
 
-//        LocalDateTime validity = LocalDateTime.now().plusSeconds(this.tokenValidityInMilliseconds);
         long now = (new Date()).getTime();
         Date validity = new Date(now + this.tokenValidityInMilliseconds);
 
-        //jwt 토큰 생성
         return Jwts.builder()
                 .setSubject(authentication.getName())
                 .claim(AUTHORITIES_KEY, authorities)
@@ -70,7 +67,7 @@ public class TokenProvider implements InitializingBean {
                 .setExpiration(validity)
                 .compact();
     }
-    //Token을 파라미터로 받아 Token에 담겨있는 궎나 정보를 이용해 Authentication 객체를 리턴하는 메소드 생성
+
     public Authentication getAuthentication(String token) {
         Claims claims = Jwts
                 .parserBuilder()
@@ -84,25 +81,23 @@ public class TokenProvider implements InitializingBean {
                         .map(SimpleGrantedAuthority::new)
                         .collect(Collectors.toList());
 
-        UserInfo principal = new UserInfo(claims.getSubject(), "", authorities);
+        User principal = new User(claims.getSubject(), "", authorities);
 
         return new UsernamePasswordAuthenticationToken(principal, token, authorities);
     }
 
-    //토큰의 유효성 검증을 수행하는 validateToken 메소드 추가.
-    //토큰을 파라미터로 받아서 파싱을 해보고 나오는 익셉션들을 캐치하고 문제가 있으면 false, 정상이면 true
-    public boolean validationToken(String token) {
+    public boolean validateToken(String token) {
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             return true;
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
             logger.info("잘못된 JWT 서명입니다.");
         } catch (ExpiredJwtException e) {
-            logger.info("완료된 JWT 토큰입니다.");
+            logger.info("만료된 JWT 토큰입니다.");
         } catch (UnsupportedJwtException e) {
             logger.info("지원되지 않는 JWT 토큰입니다.");
         } catch (IllegalArgumentException e) {
-            logger.info("JWT 토큰일 잘못되었습니다.");
+            logger.info("JWT 토큰이 잘못되었습니다.");
         }
         return false;
     }

@@ -31,7 +31,7 @@ public class UserInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name="userId")
+    @Column(name="userId", length = 50, unique = true)
     private String userId;
 
     @Column(name="password")
@@ -87,7 +87,7 @@ public class UserInfo {
     @ManyToMany
     @JoinTable(
             name = "user_authority",
-            joinColumns = {@JoinColumn(name = "userid", referencedColumnName = "userid")},
+            joinColumns = {@JoinColumn(name = "id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "authorityName", referencedColumnName = "authorityName")})
     private Set<Authority> authorities;
 
