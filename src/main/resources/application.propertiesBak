@@ -3,8 +3,8 @@ server.port=${port:8080}
 #Server Configuration
 #======================================================================================================================
 #spring config
-spring.web.resources.cache.cachecontrol.no-cache=true
-server.servlet.session.persistent=false
+#spring.web.resources.cache.cachecontrol.no-cache=true
+#server.servlet.session.persistent=false
 
 #======================================================================================================================
 #Hibernate Configuration
