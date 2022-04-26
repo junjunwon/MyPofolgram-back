@@ -5,6 +5,7 @@ import com.myPortfolioGramback.common.Success;
 import com.myPortfolioGramback.domain.user.userInfo.SetUser;
 import com.myPortfolioGramback.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/getProfileInfo")
+    @PreAuthorize("hasAnyole('ADMIN')")
     public @ResponseBody Success getProfileInfo(
             HttpServletRequest request,
             @RequestParam("userId") String userId) throws JsonProcessingException {
