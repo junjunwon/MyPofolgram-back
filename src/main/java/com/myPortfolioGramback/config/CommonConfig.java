@@ -21,32 +21,34 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Configuration
-public class CommonConfig implements WebMvcConfigurer {
+public class CommonConfig
+//        implements WebMvcConfigurer
+{
 
-    @Override public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**/*")
-                .addResourceLocations("classpath:/static/")
-                .resourceChain(true)
-                .addResolver(
-                        new PathResourceResolver() {
-                            @Override protected Resource getResource(String resourcePath, Resource location) throws IOException {
-                                Resource requestedResource = location.createRelative(resourcePath);
-                                return requestedResource.exists() && requestedResource.isReadable() ? requestedResource : new ClassPathResource("/static/index.html"); }
-                        });
-    }
-    @Override
-    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
-        converters.stream()
-                .filter(converter -> converter instanceof StringHttpMessageConverter)
-                .forEach(converter -> ((StringHttpMessageConverter) converter).setDefaultCharset(StandardCharsets.UTF_8));
-    }
-    @Bean
-    public ViewResolver internalResourceViewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setSuffix(".html");
-        resolver.setCache(false);
-        return resolver;
-    }
+//    @Override public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/**/*")
+//                .addResourceLocations("classpath:/static/")
+//                .resourceChain(true)
+//                .addResolver(
+//                        new PathResourceResolver() {
+//                            @Override protected Resource getResource(String resourcePath, Resource location) throws IOException {
+//                                Resource requestedResource = location.createRelative(resourcePath);
+//                                return requestedResource.exists() && requestedResource.isReadable() ? requestedResource : new ClassPathResource("/static/index.html"); }
+//                        });
+//    }
+//    @Override
+//    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+//        converters.stream()
+//                .filter(converter -> converter instanceof StringHttpMessageConverter)
+//                .forEach(converter -> ((StringHttpMessageConverter) converter).setDefaultCharset(StandardCharsets.UTF_8));
+//    }
+//    @Bean
+//    public ViewResolver internalResourceViewResolver() {
+//        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+//        resolver.setSuffix(".html");
+//        resolver.setCache(false);
+//        return resolver;
+//    }
 
     @Bean
     public ModelMapper modelMapper() {

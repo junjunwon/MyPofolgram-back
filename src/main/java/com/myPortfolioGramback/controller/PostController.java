@@ -3,13 +3,15 @@ package com.myPortfolioGramback.controller;
 import com.myPortfolioGramback.common.Success;
 import com.myPortfolioGramback.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/post")
+@RequestMapping("/api/post")
+@PreAuthorize("hasAnyole('ADMIN')")
 public class PostController {
 
     private final PostService postService;

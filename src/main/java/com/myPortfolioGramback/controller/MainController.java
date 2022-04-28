@@ -29,10 +29,10 @@ public class MainController implements ErrorController {
 
     }
 
-    @GetMapping({"/", "/error"})
-    public String index() {
-        return "index";
-    }
+//    @GetMapping({"/", "/error"})
+//    public String index() {
+//        return "index";
+//    }
 
     /**
      * 오류를 처리합니다.
