@@ -1,5 +1,6 @@
 package com.myPortfolioGramback.controller.account;
 
+import com.myPortfolioGramback.common.Success;
 import com.myPortfolioGramback.domain.user.security.LoginDto;
 import com.myPortfolioGramback.domain.user.security.TokenDto;
 import com.myPortfolioGramback.jwt.JwtFilter;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -30,7 +33,9 @@ public class AuthController {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<TokenDto> authorize(@Valid @RequestBody LoginDto loginDto) {
+    public Success authorize(@Valid @RequestBody LoginDto loginDto) {
+
+        Success success = new Success(true);
 
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
@@ -43,6 +48,13 @@ public class AuthController {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
 
-        return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
+        Map<String, Object> dataMap = new HashMap<>();
+        dataMap.put("token", new TokenDto((jwt)));
+        dataMap.put("httpHeaders", httpHeaders);
+        dataMap.put("HttpStatus", HttpStatus.OK);
+
+        success.setResult(dataMap);
+//        return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
+        return success;
     }
 }
