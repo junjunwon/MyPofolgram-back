@@ -23,7 +23,7 @@ public class UserInfoDto {
 
 
     private String website;
-    private String introduction;
+    private String intro;
     private long followerCnt;
     private long followeeCnt;
     private long postCnt;

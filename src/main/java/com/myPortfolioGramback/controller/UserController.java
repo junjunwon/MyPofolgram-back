@@ -13,27 +13,36 @@ import javax.servlet.http.HttpServletRequest;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/user")
+@PreAuthorize("isAuthenticated()")
 public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/getProfileInfo")
-    @PreAuthorize("hasAnyole('ADMIN')")
-    public @ResponseBody Success getProfileInfo(
+    @GetMapping("/getUserInfo")
+    public @ResponseBody Success getUserInfo(
             HttpServletRequest request,
             @RequestParam("userId") String userId) throws JsonProcessingException {
 
+        Success success = userService.getUserInfo(userId);
+
+        return success;
+    }
+
+    @GetMapping("/getProfileInfo")
+    public @ResponseBody Success getProfileInfo(
+            HttpServletRequest request,
+            @RequestParam("userId") String userId ) {
         Success success = userService.getProfileInfo(userId);
 
         return success;
     }
 
-    @PostMapping("/setProfile")
-    public @ResponseBody Success setProfile(
+    @PostMapping("/setUserInfo")
+    public @ResponseBody Success setUserInfo(
             @RequestBody SetUser setUser,
             HttpServletRequest request
     ) {
-        Success success = userService.setProfile(setUser);
+        Success success = userService.setUserInfo(setUser);
 
         return success;
     }

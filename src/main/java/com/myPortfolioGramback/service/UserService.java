@@ -5,10 +5,7 @@ import com.myPortfolioGramback.domain.user.follow.Follow;
 import com.myPortfolioGramback.domain.user.follow.FollowDto;
 import com.myPortfolioGramback.domain.user.follow.FollowRepository;
 import com.myPortfolioGramback.domain.user.post.Post;
-import com.myPortfolioGramback.domain.user.userInfo.SetUser;
-import com.myPortfolioGramback.domain.user.userInfo.UserInfo;
-import com.myPortfolioGramback.domain.user.userInfo.UserInfoDto;
-import com.myPortfolioGramback.domain.user.userInfo.UserRepository;
+import com.myPortfolioGramback.domain.user.userInfo.*;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -34,7 +31,7 @@ public class UserService {
      * @return Success
      */
     @Transactional
-    public Success getProfileInfo(String userId) {
+    public Success getUserInfo(String userId) {
 
         Success success = new Success(false);
 
@@ -58,18 +55,21 @@ public class UserService {
         return success;
     }
 
-    public UserInfoDto convertToDto(UserInfo userInfo, long followerCnt, long followeeCnt, long postCnt) {
-        UserInfoDto userInfoDto = modelMapper.map(userInfo, UserInfoDto.class);
-        //dummy data
-        userInfoDto.setWebsite("http://naver.com");
-        userInfoDto.setIntroduction("Hi this is wonjunho");
-        userInfoDto.setFollowerCnt(followerCnt);
-        userInfoDto.setFolloweeCnt(followeeCnt);
-        userInfoDto.setPostCnt(postCnt);
-        return userInfoDto;
+    public Success getProfileInfo(String userId) {
+        Success success = new Success(false);
+
+        UserInfo userInfo = userRepository.findByUserId(userId);
+
+        UserProfileDto userProfileDto = modelMapper.map(userInfo, UserProfileDto.class);
+
+        success.setResult(userProfileDto);
+        success.setSuccess(true);
+
+        return success;
     }
 
-    public Success setProfile(SetUser setUser) {
+
+    public Success setUserInfo(SetUser setUser) {
 
         Success success = new Success(true);
 
@@ -117,5 +117,14 @@ public class UserService {
 
         return success;
 
+    }
+
+    public UserInfoDto convertToDto(UserInfo userInfo, long followerCnt, long followeeCnt, long postCnt) {
+        UserInfoDto userInfoDto = modelMapper.map(userInfo, UserInfoDto.class);
+        //dummy data
+        userInfoDto.setFollowerCnt(followerCnt);
+        userInfoDto.setFolloweeCnt(followeeCnt);
+        userInfoDto.setPostCnt(postCnt);
+        return userInfoDto;
     }
 }

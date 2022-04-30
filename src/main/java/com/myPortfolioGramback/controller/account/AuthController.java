@@ -52,6 +52,7 @@ public class AuthController {
         dataMap.put("token", new TokenDto((jwt)));
         dataMap.put("httpHeaders", httpHeaders);
         dataMap.put("HttpStatus", HttpStatus.OK);
+        dataMap.put("userId", loginDto.getUsername());
 
         success.setResult(dataMap);
 //        return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);

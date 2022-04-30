@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/post")
-@PreAuthorize("hasAnyole('ADMIN')")
+@PreAuthorize("isAuthenticated()")
 public class PostController {
 
     private final PostService postService;
