@@ -21,7 +21,6 @@ import java.util.Set;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Entity
-@Builder
 @Table(name="UserInfo")
 public class UserInfo {
 
