@@ -369,6 +369,15 @@ i{
     white-space: nowrap;
 }
 
+/* StoryView */
+.storyView{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
 /* PostList */
 .post .top {
     padding: 15px;
@@ -701,6 +710,39 @@ i{
     }
 }
 
+/* login */
+.login{
+    position: relative;
+    text-align: center;
+    height: 100vh;
+}
+.login .logo {
+    display: inline-block;
+    align-items: baseline;
+    padding: 10px 20px;
+    justify-content: space-between;
+    
+}
+.login .logo img {
+    width: 250px;
+    display: flex;
+    align-items: center;
+}
+.login .formInput {
+    background-color: #f2f2f2;
+    border: solid;
+    border-color: #dbdbdb;
+    margin-bottom: 2vh;
+    width: 40vh;
+    height: 4vh;
+}
+.login div {
+    margin: 0;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 /* modal jh.won */
 .modal-mask {
     position: fixed;
