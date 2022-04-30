@@ -1,5 +1,8 @@
 # MyPofolgram-back
 
+### JAVA DOCS for REQUEST API
+- https://junjunwon.github.io/MyPofolgram-back/
+
 ### * host server
 #### HEROKU CLOUD APPLICATION PLATFORM
 ##### Address : https://myportfoliogram.herokuapp.com/
