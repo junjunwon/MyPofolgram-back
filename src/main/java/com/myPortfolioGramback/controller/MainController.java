@@ -13,10 +13,21 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * The type Main controller.
+ */
 @RestController
 @RequiredArgsConstructor
 public class MainController implements ErrorController {
 
+    /**
+     * axios simple Test
+     *
+     * @param request the request
+     * @return success
+     * @author jh.won
+     * @since 2022.04
+     */
     @PostMapping("/axiosTest")
     public @ResponseBody Success axiosTest(HttpServletRequest request) {
 
@@ -35,8 +46,14 @@ public class MainController implements ErrorController {
 //    }
 
     /**
-     * 오류를 처리합니다.
-     * **/
+     * 오류 처리 API
+     *
+     * @param response the response
+     * @param request  the request
+     * @return response entity
+     * @author jh.won
+     * @since 2022.04
+     */
     @RequestMapping(value = {"/", "/error"})
     public ResponseEntity<Object> handleNoHandlerFoundException(HttpServletResponse response, HttpServletRequest request) {
         int status = response.getStatus();

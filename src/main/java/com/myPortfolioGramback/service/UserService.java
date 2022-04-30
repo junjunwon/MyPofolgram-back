@@ -23,13 +23,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     private final FollowRepository followRepository;
-    /**
-     * 사용자 프로필 조회
-     *
-     * @author jh.won
-     * @since 2022.03.23
-     * @return Success
-     */
+
     @Transactional
     public Success getUserInfo(String userId) {
 
@@ -89,12 +83,6 @@ public class UserService {
         return success;
     }
 
-    /**
-     * @author jh.won
-     * @since 2022.04.16
-     * @param userId
-     * @return
-     */
     public Success getFollowList(String userId) {
         Success success = new Success(false);
         Map<String, Object> dataMap = new HashMap<>();

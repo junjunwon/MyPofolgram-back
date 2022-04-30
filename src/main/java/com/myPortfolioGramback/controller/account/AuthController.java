@@ -21,17 +21,34 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The type Auth controller.
+ */
 @RestController
 @RequestMapping("/api")
 public class AuthController {
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
+    /**
+     * Instantiates a new Auth controller.
+     *
+     * @param tokenProvider                the token provider
+     * @param authenticationManagerBuilder the authentication manager builder
+     */
     public AuthController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
         this.tokenProvider = tokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
     }
 
+    /**
+     * 유저정보 검증 및 로그인
+     *
+     * @param loginDto the login dto
+     * @return token jwt
+     * @author jh.won
+     * @since 2022.04
+     */
     @PostMapping("/authenticate")
     public Success authorize(@Valid @RequestBody LoginDto loginDto) {
 

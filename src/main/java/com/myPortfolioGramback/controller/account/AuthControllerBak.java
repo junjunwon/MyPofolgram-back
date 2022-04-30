@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+/**
+ * The type Auth controller bak.
+ */
 @RestController
 @RequestMapping("/")
 public class AuthControllerBak {

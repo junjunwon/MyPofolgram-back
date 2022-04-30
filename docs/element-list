@@ -1,0 +1,12 @@
+com.myPortfolioGramback
+com.myPortfolioGramback.common
+com.myPortfolioGramback.config
+com.myPortfolioGramback.controller
+com.myPortfolioGramback.controller.account
+com.myPortfolioGramback.domain.user
+com.myPortfolioGramback.domain.user.follow
+com.myPortfolioGramback.domain.user.post
+com.myPortfolioGramback.domain.user.security
+com.myPortfolioGramback.domain.user.userInfo
+com.myPortfolioGramback.jwt
+com.myPortfolioGramback.service

@@ -3,9 +3,6 @@ package com.myPortfolioGramback.common;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * FrontEnd 로 보내는 결과 집합
- */
 @Getter
 @Setter
 public class Success {
