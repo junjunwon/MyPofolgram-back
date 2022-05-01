@@ -7,6 +7,7 @@ build/
 
 ### application.yml ignore ###
 src/main/resources/application.yml
+src/main/resources/application.propertiesBak
 
 ### STS ###
 .apt_generated
