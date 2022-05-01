@@ -20,7 +20,7 @@ public class UserInfoDto {
     private String email;
     private String mobile;
     private LocalDateTime createDate;
-
+    private String userImgUrl;
 
     private String website;
     private String intro;
