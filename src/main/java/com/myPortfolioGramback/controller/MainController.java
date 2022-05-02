@@ -21,6 +21,10 @@ import java.util.Objects;
 public class MainController implements ErrorController {
 
     /**
+     * CORS TEST로 인한 주석 추가
+     *
+     */
+    /**
      * axios simple Test
      *
      * @param request the request
