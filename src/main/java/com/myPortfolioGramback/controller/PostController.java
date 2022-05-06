@@ -38,4 +38,13 @@ public class PostController {
 
         return success;
     }
+
+    @GetMapping("/getPostListDetail")
+    public @ResponseBody Success getPostListDetail(
+            HttpServletRequest request
+    ) {
+        Success success = postService.getPostListDetail();
+
+        return success;
+    }
 }

@@ -63,5 +63,10 @@ public class Post {
     private Set<Likes> likes = new HashSet<Likes>();
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Photos> photos = new HashSet<Photos>();
+    private List<Photos> photos = new ArrayList<>();
+
+    public void addPhotos(Photos photo) {
+        photo.setPost(this);
+        photos.add(photo);
+    }
 }
