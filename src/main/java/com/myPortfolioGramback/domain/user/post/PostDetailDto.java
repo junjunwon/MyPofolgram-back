@@ -12,6 +12,7 @@ import java.util.List;
 public class PostDetailDto {
     private int id;
     private String userImgUrl;
+    private String nickName;
     private List<String> photoImgUrl;
     private String content;
     private LocalDateTime createDate;

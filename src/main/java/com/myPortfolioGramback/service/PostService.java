@@ -93,6 +93,7 @@ public class PostService {
             PostDetailDto postDetailDto = new PostDetailDto();
             postDetailDto.setContent(post.getContent());
             postDetailDto.setCreateDate(post.getCreateDate());
+            postDetailDto.setNickName(post.getUserInfo().getUserName());
             postDetailDto.setUserImgUrl(post.getUserInfo().getUserImgUrl());
             List<String> photos = new ArrayList<>();
             for(int i = 0; i<post.getPhotos().size(); i++) {
