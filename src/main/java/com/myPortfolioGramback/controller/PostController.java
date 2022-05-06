@@ -41,9 +41,10 @@ public class PostController {
 
     @GetMapping("/getPostListDetail")
     public @ResponseBody Success getPostListDetail(
-            HttpServletRequest request
+            HttpServletRequest request,
+            @RequestParam("userId") String userId
     ) {
-        Success success = postService.getPostListDetail();
+        Success success = postService.getPostListDetail(userId);
 
         return success;
     }

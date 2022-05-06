@@ -12,10 +12,11 @@ import java.util.List;
 public class PostDetailDto {
     private int id;
     private String userImgUrl;
-    private String photoImgUrl;
+    private List<String> photoImgUrl;
     private String content;
     private LocalDateTime createDate;
     private int commentCount;
+    private int likeCount;
     private String isLiked;
     private List<?> hashTags;
 }
