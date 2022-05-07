@@ -116,7 +116,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <!-- ======== START OF CLASS DATA ======== -->
 <main role="main">
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">com.myPortfolioGramback.domain.user.userInfo</a></div>
+<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">com.myPortfolioGramback.domain.userInfo</a></div>
 <h2 title="Interface UserRepository" class="title">Interface UserRepository</h2>
 </div>
 <div class="contentContainer">
@@ -125,12 +125,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><code>org.springframework.data.repository.CrudRepository&lt;<a href="UserInfo.html" title="class in com.myPortfolioGramback.domain.user.userInfo">UserInfo</a>,&#8203;java.lang.Long&gt;</code>, <code>org.springframework.data.jpa.repository.JpaRepository&lt;<a href="UserInfo.html" title="class in com.myPortfolioGramback.domain.user.userInfo">UserInfo</a>,&#8203;java.lang.Long&gt;</code>, <code>org.springframework.data.repository.PagingAndSortingRepository&lt;<a href="UserInfo.html" title="class in com.myPortfolioGramback.domain.user.userInfo">UserInfo</a>,&#8203;java.lang.Long&gt;</code>, <code>org.springframework.data.repository.query.QueryByExampleExecutor&lt;<a href="UserInfo.html" title="class in com.myPortfolioGramback.domain.user.userInfo">UserInfo</a>&gt;</code>, <code>org.springframework.data.repository.Repository&lt;<a href="UserInfo.html" title="class in com.myPortfolioGramback.domain.user.userInfo">UserInfo</a>,&#8203;java.lang.Long&gt;</code></dd>
+<dd><code>org.springframework.data.repository.CrudRepository&lt;<a href="UserInfo.html" title="class in com.myPortfolioGramback.domain.userInfo">UserInfo</a>,&#8203;java.lang.Long&gt;</code>, <code>org.springframework.data.jpa.repository.JpaRepository&lt;<a href="UserInfo.html" title="class in com.myPortfolioGramback.domain.userInfo">UserInfo</a>,&#8203;java.lang.Long&gt;</code>, <code>org.springframework.data.repository.PagingAndSortingRepository&lt;<a href="UserInfo.html" title="class in com.myPortfolioGramback.domain.userInfo">UserInfo</a>,&#8203;java.lang.Long&gt;</code>, <code>org.springframework.data.repository.query.QueryByExampleExecutor&lt;<a href="UserInfo.html" title="class in com.myPortfolioGramback.domain.userInfo">UserInfo</a>&gt;</code>, <code>org.springframework.data.repository.Repository&lt;<a href="UserInfo.html" title="class in com.myPortfolioGramback.domain.userInfo">UserInfo</a>,&#8203;java.lang.Long&gt;</code></dd>
 </dl>
 <hr>
 <pre>@Repository
 public interface <span class="typeNameLabel">UserRepository</span>
-extends org.springframework.data.jpa.repository.JpaRepository&lt;<a href="UserInfo.html" title="class in com.myPortfolioGramback.domain.user.userInfo">UserInfo</a>,&#8203;java.lang.Long&gt;</pre>
+extends org.springframework.data.jpa.repository.JpaRepository&lt;<a href="UserInfo.html" title="class in com.myPortfolioGramback.domain.userInfo">UserInfo</a>,&#8203;java.lang.Long&gt;</pre>
 </li>
 </ul>
 </div>
@@ -152,12 +152,12 @@ extends org.springframework.data.jpa.repository.JpaRepository&lt;<a href="UserIn
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="UserInfo.html" title="class in com.myPortfolioGramback.domain.user.userInfo">UserInfo</a></code></td>
+<td class="colFirst"><code><a href="UserInfo.html" title="class in com.myPortfolioGramback.domain.userInfo">UserInfo</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#findByUserId(java.lang.String)">findByUserId</a></span>&#8203;(java.lang.String&nbsp;userId)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="UserInfo.html" title="class in com.myPortfolioGramback.domain.user.userInfo">UserInfo</a>&gt;</code></td>
+<td class="colFirst"><code>java.util.Optional&lt;<a href="UserInfo.html" title="class in com.myPortfolioGramback.domain.userInfo">UserInfo</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#findOneWithAuthoritiesByUserId(java.lang.String)">findOneWithAuthoritiesByUserId</a></span>&#8203;(java.lang.String&nbsp;userId)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -212,7 +212,7 @@ extends org.springframework.data.jpa.repository.JpaRepository&lt;<a href="UserIn
 <ul class="blockList">
 <li class="blockList">
 <h4>findByUserId</h4>
-<pre class="methodSignature"><a href="UserInfo.html" title="class in com.myPortfolioGramback.domain.user.userInfo">UserInfo</a>&nbsp;findByUserId&#8203;(java.lang.String&nbsp;userId)</pre>
+<pre class="methodSignature"><a href="UserInfo.html" title="class in com.myPortfolioGramback.domain.userInfo">UserInfo</a>&nbsp;findByUserId&#8203;(java.lang.String&nbsp;userId)</pre>
 </li>
 </ul>
 <a id="findOneWithAuthoritiesByUserId(java.lang.String)">
@@ -222,7 +222,7 @@ extends org.springframework.data.jpa.repository.JpaRepository&lt;<a href="UserIn
 <li class="blockList">
 <h4>findOneWithAuthoritiesByUserId</h4>
 <pre class="methodSignature">@EntityGraph(attributePaths="authorities")
-java.util.Optional&lt;<a href="UserInfo.html" title="class in com.myPortfolioGramback.domain.user.userInfo">UserInfo</a>&gt;&nbsp;findOneWithAuthoritiesByUserId&#8203;(java.lang.String&nbsp;userId)</pre>
+java.util.Optional&lt;<a href="UserInfo.html" title="class in com.myPortfolioGramback.domain.userInfo">UserInfo</a>&gt;&nbsp;findOneWithAuthoritiesByUserId&#8203;(java.lang.String&nbsp;userId)</pre>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>userId</code> - </dd>

@@ -1,7 +1,7 @@
 package com.myPortfolioGramback.repository;
 
-import com.myPortfolioGramback.domain.user.userInfo.UserInfo;
-import com.myPortfolioGramback.domain.user.userInfo.UserRepository;
+import com.myPortfolioGramback.domain.userInfo.UserInfo;
+import com.myPortfolioGramback.domain.userInfo.UserRepository;
 import com.myPortfolioGramback.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

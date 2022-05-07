@@ -1,6 +1,5 @@
 package com.myPortfolioGramback.jwt;
 
-import com.myPortfolioGramback.domain.user.userInfo.UserInfo;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -15,12 +14,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Array;
 import java.security.Key;
-import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Base64;
 import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;

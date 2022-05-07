@@ -2,7 +2,7 @@ package com.myPortfolioGramback.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.myPortfolioGramback.common.Success;
-import com.myPortfolioGramback.domain.user.userInfo.SetUser;
+import com.myPortfolioGramback.domain.userInfo.SetUser;
 import com.myPortfolioGramback.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;

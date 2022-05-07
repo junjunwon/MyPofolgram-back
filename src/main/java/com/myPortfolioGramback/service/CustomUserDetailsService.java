@@ -1,7 +1,7 @@
 package com.myPortfolioGramback.service;
 
-import com.myPortfolioGramback.domain.user.userInfo.UserInfo;
-import com.myPortfolioGramback.domain.user.userInfo.UserRepository;
+import com.myPortfolioGramback.domain.userInfo.UserInfo;
+import com.myPortfolioGramback.domain.userInfo.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

@@ -1,35 +1,41 @@
 package com.myPortfolioGramback.service;
 
 import com.myPortfolioGramback.common.Success;
-import com.myPortfolioGramback.domain.user.Likes;
-import com.myPortfolioGramback.domain.user.Photos;
-import com.myPortfolioGramback.domain.user.follow.FollowDto;
-import com.myPortfolioGramback.domain.user.post.Post;
-import com.myPortfolioGramback.domain.user.post.PostDetailDto;
-import com.myPortfolioGramback.domain.user.post.PostDto;
-import com.myPortfolioGramback.domain.user.post.PostRepository;
+import com.myPortfolioGramback.domain.likes.Likes;
+import com.myPortfolioGramback.domain.comments.Comments;
+import com.myPortfolioGramback.domain.comments.CommentsDto;
+import com.myPortfolioGramback.domain.comments.CommentsRepository;
+import com.myPortfolioGramback.domain.likes.LikesRepository;
+import com.myPortfolioGramback.domain.post.Post;
+import com.myPortfolioGramback.domain.post.PostDetailDto;
+import com.myPortfolioGramback.domain.post.PostDto;
+import com.myPortfolioGramback.domain.post.PostRepository;
+import com.myPortfolioGramback.domain.userInfo.UserInfo;
+import com.myPortfolioGramback.domain.userInfo.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
 import javax.persistence.EntityManager;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import javax.persistence.TypedQuery;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 public class PostService {
 
-    private final PostRepository postRepository;
-
     private final EntityManager entityManager;
 
     private final ModelMapper modelMapper;
+
+    private final PostRepository postRepository;
+
+    private final CommentsRepository commentsRepository;
+
+    private final UserRepository userRepository;
+
+    private final LikesRepository likesRepository;
+
 
     public Success getPostList(String userId) {
         Success success = new Success(true);
@@ -91,6 +97,7 @@ public class PostService {
 
         for(Post post : postList) {
             PostDetailDto postDetailDto = new PostDetailDto();
+            postDetailDto.setId(post.getId());
             postDetailDto.setContent(post.getContent());
             postDetailDto.setCreateDate(post.getCreateDate());
             postDetailDto.setNickName(post.getUserInfo().getUserName());
@@ -120,5 +127,56 @@ public class PostService {
         }
 
         return postDetailDtos;
+    }
+
+
+    public Success getCommentList(String postId) {
+        Success success = new Success(false);
+
+        List<Comments> commentsList = commentsRepository.findAllByPostId(Integer.parseInt(postId));
+
+        List<CommentsDto> commentsDtos = convertToCommentDto(commentsList);
+
+        success.setResult(commentsDtos);
+        success.setSuccess(true);
+
+        return success;
+
+    }
+
+    private List<CommentsDto> convertToCommentDto(List<Comments> commentsList) {
+        List<CommentsDto> list = new ArrayList<>();
+
+        for(Comments comments : commentsList) {
+            CommentsDto commentsDto = new CommentsDto();
+            long userId = comments.getUserId();
+            String jpql = "select u from UserInfo u where u.id = :userId";
+            TypedQuery<UserInfo> query = entityManager.createQuery(jpql, UserInfo.class);
+            query.setParameter("userId", userId);
+
+            List<UserInfo> resultList = query.getResultList();
+
+            commentsDto.setNickName(resultList.get(0).getUserName());
+            commentsDto.setUserImgUrl(resultList.get(0).getUserImgUrl());
+            commentsDto.setComment(comments.getComment());
+            commentsDto.setCreateDate(comments.getCreateDate());
+
+            list.add(commentsDto);
+        }
+
+        return list;
+    }
+
+    public Success saveLikeForPost(String userId, String postId) {
+        Success success = new Success(false);
+        Likes likes = new Likes();
+        Post post = postRepository.getById(Integer.parseInt(postId));
+        UserInfo userInfo = userRepository.findByUserId(userId); //id인지 userId 인지?
+        likes.setPost(post);
+        likes.setUserInfo(userInfo);
+        likesRepository.save(likes);
+
+        success.setSuccess(true);
+        return success;
     }
 }

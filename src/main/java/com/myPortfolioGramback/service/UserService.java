@@ -1,11 +1,10 @@
 package com.myPortfolioGramback.service;
 
 import com.myPortfolioGramback.common.Success;
-import com.myPortfolioGramback.domain.user.follow.Follow;
-import com.myPortfolioGramback.domain.user.follow.FollowDto;
-import com.myPortfolioGramback.domain.user.follow.FollowRepository;
-import com.myPortfolioGramback.domain.user.post.Post;
-import com.myPortfolioGramback.domain.user.userInfo.*;
+import com.myPortfolioGramback.domain.follow.Follow;
+import com.myPortfolioGramback.domain.follow.FollowDto;
+import com.myPortfolioGramback.domain.follow.FollowRepository;
+import com.myPortfolioGramback.domain.userInfo.*;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;

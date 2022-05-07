@@ -21,6 +21,7 @@ public class PostController {
 
     /**
      * 게시물 리스트 조회 API
+     * 간략한 리스트 조회로 postId, 첫번째 photo 이미지 url만 호출
      *
      * @param request the request
      * @param userId  the user id
@@ -39,12 +40,51 @@ public class PostController {
         return success;
     }
 
+    /**
+     * get whole information of Post List
+     *
+     * @author jh.won
+     * @since 2022.05.07
+     * @param request
+     * @param userId
+     * @return
+     */
     @GetMapping("/getPostListDetail")
     public @ResponseBody Success getPostListDetail(
             HttpServletRequest request,
             @RequestParam("userId") String userId
     ) {
         Success success = postService.getPostListDetail(userId);
+
+        return success;
+    }
+
+    /**
+     * get commentList by postId
+     *
+     * @author jh.won
+     * @since 2022.05.07
+     * @param request
+     * @param postId
+     * @return
+     */
+    @GetMapping("/getCommentList")
+    public @ResponseBody Success getCommentList(
+            HttpServletRequest request,
+            @RequestParam("postId") String postId
+    ) {
+        Success success = postService.getCommentList(postId);
+
+        return success;
+    }
+
+    @PostMapping("/saveLikeForPost")
+    public @ResponseBody Success saveLikeForPost(
+            HttpServletRequest request,
+            @RequestParam("userId") String userId,
+            @RequestParam("postId") String postId
+    ) {
+        Success success = postService.saveLikeForPost(userId, postId);
 
         return success;
     }
