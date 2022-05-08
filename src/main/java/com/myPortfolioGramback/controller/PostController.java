@@ -1,6 +1,8 @@
 package com.myPortfolioGramback.controller;
 
 import com.myPortfolioGramback.common.Success;
+import com.myPortfolioGramback.domain.likes.SaveLikeDto;
+import com.myPortfolioGramback.domain.userInfo.SetUser;
 import com.myPortfolioGramback.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -81,10 +83,16 @@ public class PostController {
     @PostMapping("/saveLikeForPost")
     public @ResponseBody Success saveLikeForPost(
             HttpServletRequest request,
-            @RequestParam("userId") String userId,
-            @RequestParam("postId") String postId
+            @RequestBody SaveLikeDto saveLikeDto
+//            @RequestParam("userId") String userId,
+//            @RequestParam("postId") String postId,
+//            @RequestParam("isLiked") String isLiked
     ) {
-        Success success = postService.saveLikeForPost(userId, postId);
+        String userId = saveLikeDto.getUserId();
+        String postId = saveLikeDto.getPostId();
+        String isLiked = saveLikeDto.getIsLiked();
+
+        Success success = postService.saveLikeForPost(userId, postId, isLiked);
 
         return success;
     }

@@ -14,9 +14,12 @@ import com.myPortfolioGramback.domain.userInfo.UserInfo;
 import com.myPortfolioGramback.domain.userInfo.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.*;
 
@@ -43,7 +46,7 @@ public class PostService {
         List<Post> postList = postRepository.findAll();
 
         List<PostDto> postDtoList = convertToPostDTO(userId, postList);
-        /**
+        /*
          * select post.id, file_name, p.id from post inner join photos p ON post.id = p.postid
          * where post.id = 1
          * order by p.id asc
@@ -115,9 +118,11 @@ public class PostService {
 //            postDto.setImgUrl(photos.next().getFileName());
 
             Iterator<Likes> likes = post.getLikes().iterator();
-
+            postDetailDto.setIsLiked("false");
             while(likes.hasNext()) {
-                if(Objects.equals(userId, likes.next().getUserInfo().getUserId())) {
+                UserInfo userInfo = likes.next().getUserInfo();
+                likes.remove();
+                if(Objects.equals(userId, userInfo.getUserId())) {
                     postDetailDto.setIsLiked("true");
                     break;
                 }
@@ -167,14 +172,48 @@ public class PostService {
         return list;
     }
 
-    public Success saveLikeForPost(String userId, String postId) {
+    @Transactional
+    public Success saveLikeForPost(String userId, String postId, String isLiked) {
         Success success = new Success(false);
-        Likes likes = new Likes();
+
         Post post = postRepository.getById(Integer.parseInt(postId));
-        UserInfo userInfo = userRepository.findByUserId(userId); //id인지 userId 인지?
+        UserInfo userInfo = userRepository.getById(Long.parseLong(userId)); //id인지 userId 인지?
+
+        Likes likes =new Likes();
         likes.setPost(post);
         likes.setUserInfo(userInfo);
-        likesRepository.save(likes);
+
+        int deleteCount = 0;
+        boolean isDelete = false; //false : delete, true : save
+
+        if(!ObjectUtils.isEmpty(post) && !ObjectUtils.isEmpty(userId)){
+            if(Objects.equals(isLiked, "false")) {
+                deleteCount = likesRepository.deleteByPostAndUserInfo(post, userInfo);
+            }
+            else if(Objects.equals(isLiked, "true")){
+                Likes getLikes = likesRepository.findByPostAndUserInfo(post, userInfo);
+                if(ObjectUtils.isEmpty(getLikes)) {
+                    Likes likesResult = likesRepository.save(likes);
+                    if(ObjectUtils.isEmpty(likesResult)) {
+                        success.setSuccess(false);
+                        success.setErrorMsg("failed_to_save");
+                        return success;
+                    }
+                } else {
+                    success.setSuccess(false);
+                    success.setErrorMsg("already_saved_data_sync_probs_exist");
+                    return success;
+                }
+                deleteCount = 1;
+                isDelete = true;
+            }
+        }
+        if(deleteCount != 1) {
+            success.setSuccess(false);
+            success.setErrorMsg("something_is_wrong");
+            return success;
+        }
+        success.setResult(isDelete);
 
         success.setSuccess(true);
         return success;

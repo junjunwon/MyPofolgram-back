@@ -9,7 +9,6 @@ import javax.persistence.*;
 @Setter
 @Getter
 @RequiredArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name="Likes")
 public class Likes {
