@@ -1,8 +1,10 @@
 package com.myPortfolioGramback.domain.post;
 
+import com.myPortfolioGramback.domain.userInfo.UserInfo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,7 +15,9 @@ public class PostDetailDto {
     private int id;
     private String userImgUrl;
     private String nickName;
+    private UserInfo userInfo;
     private List<String> photoImgUrl;
+//    private List<Object> photoImgUrl;
     private String content;
     private LocalDateTime createDate;
     private int commentCount;

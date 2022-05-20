@@ -2,6 +2,7 @@ package com.myPortfolioGramback.controller;
 
 import com.myPortfolioGramback.common.Success;
 import com.myPortfolioGramback.domain.likes.SaveLikeDto;
+import com.myPortfolioGramback.domain.post.PostDetailDto;
 import com.myPortfolioGramback.domain.userInfo.SetUser;
 import com.myPortfolioGramback.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -93,6 +94,16 @@ public class PostController {
         String isLiked = saveLikeDto.getIsLiked();
 
         Success success = postService.saveLikeForPost(userId, postId, isLiked);
+
+        return success;
+    }
+
+    @PostMapping("/savePost")
+    public @ResponseBody Success savePost(
+            HttpServletRequest request,
+            @RequestBody PostDetailDto postDetailDto
+    ) {
+        Success success = postService.savePost(postDetailDto);
 
         return success;
     }

@@ -74,7 +74,10 @@ public class PostService {
             //Set으로 처리할때
 //            Iterator<Photos> photos = post.getPhotos().iterator();
 //            postDto.setImgUrl(photos.next().getFileName());
-            postDto.setImgUrl(post.getPhotos().get(0).getFileName());
+            if(post.getPhotos().size() > 0) {
+                postDto.setImgUrl(post.getPhotos().get(0).getFileName());
+            }
+
 
             postDtoList.add(postDto);
         }
@@ -216,6 +219,15 @@ public class PostService {
         success.setResult(isDelete);
 
         success.setSuccess(true);
+        return success;
+    }
+
+    public Success savePost(PostDetailDto postDetailDto) {
+        Success success = new Success(true);
+
+        Post post = modelMapper.map(postDetailDto, Post.class);
+        postRepository.save(post);
+
         return success;
     }
 }
