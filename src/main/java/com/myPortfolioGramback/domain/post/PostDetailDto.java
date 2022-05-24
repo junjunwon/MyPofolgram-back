@@ -15,11 +15,10 @@ public class PostDetailDto {
     private int id;
     private String userImgUrl;
     private String nickName;
-    private UserInfo userInfo;
+    private long userId;
     private List<String> photoImgUrl;
-//    private List<Object> photoImgUrl;
     private String content;
-    private LocalDateTime createDate;
+//    private LocalDateTime createDate;
     private int commentCount;
     private int likeCount;
     private String isLiked;

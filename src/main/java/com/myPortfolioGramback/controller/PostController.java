@@ -3,13 +3,16 @@ package com.myPortfolioGramback.controller;
 import com.myPortfolioGramback.common.Success;
 import com.myPortfolioGramback.domain.likes.SaveLikeDto;
 import com.myPortfolioGramback.domain.post.PostDetailDto;
+import com.myPortfolioGramback.domain.post.SavePostDto;
 import com.myPortfolioGramback.domain.userInfo.SetUser;
 import com.myPortfolioGramback.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
 /**
  * The type Post controller.
@@ -101,9 +104,10 @@ public class PostController {
     @PostMapping("/savePost")
     public @ResponseBody Success savePost(
             HttpServletRequest request,
-            @RequestBody PostDetailDto postDetailDto
-    ) {
-        Success success = postService.savePost(postDetailDto);
+            SavePostDto savePostDto
+    ) throws IOException {
+        PostDetailDto postDetailDto = new PostDetailDto();
+        Success success = postService.savePost(savePostDto);
 
         return success;
     }

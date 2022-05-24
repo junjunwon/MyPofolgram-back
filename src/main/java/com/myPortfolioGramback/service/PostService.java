@@ -1,17 +1,16 @@
 package com.myPortfolioGramback.service;
 
 import com.myPortfolioGramback.common.Success;
+import com.myPortfolioGramback.domain.Photos;
 import com.myPortfolioGramback.domain.likes.Likes;
 import com.myPortfolioGramback.domain.comments.Comments;
 import com.myPortfolioGramback.domain.comments.CommentsDto;
 import com.myPortfolioGramback.domain.comments.CommentsRepository;
 import com.myPortfolioGramback.domain.likes.LikesRepository;
-import com.myPortfolioGramback.domain.post.Post;
-import com.myPortfolioGramback.domain.post.PostDetailDto;
-import com.myPortfolioGramback.domain.post.PostDto;
-import com.myPortfolioGramback.domain.post.PostRepository;
+import com.myPortfolioGramback.domain.post.*;
 import com.myPortfolioGramback.domain.userInfo.UserInfo;
 import com.myPortfolioGramback.domain.userInfo.UserRepository;
+import com.myPortfolioGramback.service.amazonS3.S3Service;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import javax.transaction.Transactional;
@@ -21,6 +20,7 @@ import org.springframework.util.ObjectUtils;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.io.IOException;
 import java.util.*;
 
 @Service
@@ -39,6 +39,7 @@ public class PostService {
 
     private final LikesRepository likesRepository;
 
+    private final S3Service s3Service = new S3Service();
 
     public Success getPostList(String userId) {
         Success success = new Success(true);
@@ -104,10 +105,10 @@ public class PostService {
         for(Post post : postList) {
             PostDetailDto postDetailDto = new PostDetailDto();
             postDetailDto.setId(post.getId());
-            postDetailDto.setContent(post.getContent());
-            postDetailDto.setCreateDate(post.getCreateDate());
-            postDetailDto.setNickName(post.getUserInfo().getUserName());
+            if(!ObjectUtils.isEmpty(post.getContent())) postDetailDto.setContent(post.getContent());
+            if(!ObjectUtils.isEmpty(post.getUserInfo().getUserName())) postDetailDto.setNickName(post.getUserInfo().getUserName());
             postDetailDto.setUserImgUrl(post.getUserInfo().getUserImgUrl());
+//            postDetailDto.setCreateDate(post.getCreateDate());
             List<String> photos = new ArrayList<>();
             for(int i = 0; i<post.getPhotos().size(); i++) {
                 photos.add(post.getPhotos().get(i).getFileName());
@@ -222,10 +223,27 @@ public class PostService {
         return success;
     }
 
-    public Success savePost(PostDetailDto postDetailDto) {
+    public Success savePost(SavePostDto savePostDto) throws IOException {
         Success success = new Success(true);
 
-        Post post = modelMapper.map(postDetailDto, Post.class);
+        Post post = modelMapper.map(savePostDto.getPostDetailDto(), Post.class);
+
+        UserInfo userInfo = userRepository.getById(savePostDto.getPostDetailDto().getUserId()); //id인지 userId 인지?
+
+        List<String> fileList = new ArrayList<>();
+        List<Photos> photoList = new ArrayList<>();
+        for(int i = 0; i < savePostDto.getMultipartFiles().size(); i++) {
+            Photos photo = null;
+            String fileName = s3Service.upload(savePostDto.getMultipartFiles().get(i));
+            fileList.add(fileName);
+            photo.setFileName(fileName);
+            photo.setPost(post);
+            photoList.add(photo);
+        }
+
+        post.setPhotos(photoList);
+        post.setUserInfo(userInfo);
+
         postRepository.save(post);
 
         return success;
