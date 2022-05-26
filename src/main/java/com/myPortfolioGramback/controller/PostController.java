@@ -10,9 +10,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * The type Post controller.
@@ -103,10 +105,8 @@ public class PostController {
 
     @PostMapping("/savePost")
     public @ResponseBody Success savePost(
-            HttpServletRequest request,
             SavePostDto savePostDto
     ) throws IOException {
-        PostDetailDto postDetailDto = new PostDetailDto();
         Success success = postService.savePost(savePostDto);
 
         return success;

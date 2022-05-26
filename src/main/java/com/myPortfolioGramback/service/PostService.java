@@ -39,7 +39,7 @@ public class PostService {
 
     private final LikesRepository likesRepository;
 
-    private final S3Service s3Service = new S3Service();
+    private final S3Service s3Service;
 
     public Success getPostList(String userId) {
         Success success = new Success(true);
@@ -232,8 +232,9 @@ public class PostService {
 
         List<String> fileList = new ArrayList<>();
         List<Photos> photoList = new ArrayList<>();
+
         for(int i = 0; i < savePostDto.getMultipartFiles().size(); i++) {
-            Photos photo = null;
+            Photos photo = new Photos();
             String fileName = s3Service.upload(savePostDto.getMultipartFiles().get(i));
             fileList.add(fileName);
             photo.setFileName(fileName);
