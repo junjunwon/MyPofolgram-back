@@ -7,6 +7,7 @@ import com.myPortfolioGramback.domain.post.SavePostDto;
 import com.myPortfolioGramback.domain.userInfo.SetUser;
 import com.myPortfolioGramback.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -55,14 +57,16 @@ public class PostController {
      * @since 2022.05.07
      * @param request
      * @param userId
+     * @param isMypage
      * @return
      */
     @GetMapping("/getPostListDetail")
     public @ResponseBody Success getPostListDetail(
             HttpServletRequest request,
-            @RequestParam("userId") String userId
+            @RequestParam("userId") String userId,
+            @RequestParam(value = "isMypage", required = false) String isMypage
     ) {
-        Success success = postService.getPostListDetail(userId);
+        Success success = postService.getPostListDetail(userId, isMypage);
 
         return success;
     }
@@ -103,10 +107,15 @@ public class PostController {
         return success;
     }
 
-    @PostMapping("/savePost")
+    @PostMapping(value = "/savePost", consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
     public @ResponseBody Success savePost(
-            SavePostDto savePostDto
+            @RequestPart(value="postDetailDto", required=false) PostDetailDto postDetailDto,
+            @RequestPart(value="multipartFiles", required=true) ArrayList<MultipartFile> multipartFiles
     ) throws IOException {
+        SavePostDto savePostDto = new SavePostDto();
+        savePostDto.setMultipartFiles(multipartFiles);
+        savePostDto.setPostDetailDto(postDetailDto);
+
         Success success = postService.savePost(savePostDto);
 
         return success;
