@@ -18,7 +18,7 @@ public class PostDetailDto {
     private long userId;
     private List<String> photoImgUrl;
     private String content;
-//    private LocalDateTime createDate;
+    private LocalDateTime createDate;
     private int commentCount;
     private int likeCount;
     private String isLiked;

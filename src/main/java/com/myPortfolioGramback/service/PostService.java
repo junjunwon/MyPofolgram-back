@@ -86,10 +86,20 @@ public class PostService {
         return postDtoList;
     }
 
-    public Success getPostListDetail(String userId) {
+    public Success getPostListDetail(String userId, String isMypage) {
         Success success = new Success(false);
+        List<Post> postList = new ArrayList<>();
+        postList = postRepository.findAllByOrderByCreateDateDesc();
 
-        List<Post> postList = postRepository.findAll();
+        /**
+         * 참조객체인 userinfo를 통해 post정보 찾는 방법 찾기.
+         */
+//        if(ObjectUtils.isEmpty(isMypage)) {
+//            postList = postRepository.findAllByOrderByCreateDateDesc();
+//        } else {
+//            postList = postRepository.findAllByUserInfo_idByOrderByCreateDateDesc(userInfo.getId());
+//        }
+
 
         List<PostDetailDto> postDetailDtos = convertToPostDetailDto(userId, postList);
 
@@ -108,7 +118,7 @@ public class PostService {
             if(!ObjectUtils.isEmpty(post.getContent())) postDetailDto.setContent(post.getContent());
             if(!ObjectUtils.isEmpty(post.getUserInfo().getUserName())) postDetailDto.setNickName(post.getUserInfo().getUserName());
             postDetailDto.setUserImgUrl(post.getUserInfo().getUserImgUrl());
-//            postDetailDto.setCreateDate(post.getCreateDate());
+            postDetailDto.setCreateDate(post.getCreateDate());
             List<String> photos = new ArrayList<>();
             for(int i = 0; i<post.getPhotos().size(); i++) {
                 photos.add(post.getPhotos().get(i).getFileName());
