@@ -44,9 +44,9 @@ public class PostService {
     public Success getPostList(String userId) {
         Success success = new Success(true);
 
-        List<Post> postList = postRepository.findAll();
+//        List<Post> postList = postRepository.findAll();
 
-        List<PostDto> postDtoList = convertToPostDTO(userId, postList);
+//        List<PostDto> postDtoList = convertToPostDTO(userId, postList);
         /*
          * select post.id, file_name, p.id from post inner join photos p ON post.id = p.postid
          * where post.id = 1
@@ -58,39 +58,42 @@ public class PostService {
 
 //        List<PostDto> postDtos = convertToPostDTO(posts);
 
-        success.setResult(postDtoList);
+//        success.setResult(postDtoList);
 
         return success;
     }
 
-    private List<PostDto> convertToPostDTO(String userId, List<Post> postList) {
-
-        List<PostDto> postDtoList = new ArrayList<>();
-        for(Post post : postList) {
-            //추후 findByUserId로 변경해서 최적화
-            if(!Objects.equals(userId, post.getUserInfo().getUserId())) continue;
-            PostDto postDto = new PostDto();
-            postDto.setPostId(post.getId());
-
-            //Set으로 처리할때
-//            Iterator<Photos> photos = post.getPhotos().iterator();
-//            postDto.setImgUrl(photos.next().getFileName());
-            if(post.getPhotos().size() > 0) {
-                postDto.setImgUrl(post.getPhotos().get(0).getFileName());
-            }
-
-
-            postDtoList.add(postDto);
-        }
-
-        return postDtoList;
-    }
+//    private List<PostDto> convertToPostDTO(String userId, List<Post> postList) {
+//
+//        List<PostDto> postDtoList = new ArrayList<>();
+//        for(Post post : postList) {
+//            //추후 findByUserId로 변경해서 최적화
+//            if(!Objects.equals(userId, post.getUserInfo().getUserId())) continue;
+//            PostDto postDto = new PostDto();
+//            postDto.setPostId(post.getId());
+//
+//            //Set으로 처리할때
+////            Iterator<Photos> photos = post.getPhotos().iterator();
+////            postDto.setImgUrl(photos.next().getFileName());
+//            if(post.getPhotos().size() > 0) {
+//                postDto.setImgUrl(post.getPhotos().get(0).getFileName());
+//            }
+//
+//
+//            postDtoList.add(postDto);
+//        }
+//
+//        return postDtoList;
+//    }
 
     public Success getPostListDetail(String userId, String isMypage) {
         Success success = new Success(false);
-        List<Post> postList = new ArrayList<>();
-        postList = postRepository.findAllByOrderByCreateDateDesc();
+//        List<Post> postList = new ArrayList<>();
+//        postList = postRepository.findAllByOrderByCreateDateDesc();
 
+        Optional<Object[]> postList = postRepository.getPostList();
+        Optional<Object[]> getCnts = postRepository.getCnts();
+        List<PostDto> postDtoList = convertObjectToPostDto(postList, getCnts);
         /**
          * 참조객체인 userinfo를 통해 post정보 찾는 방법 찾기.
          */
@@ -101,11 +104,27 @@ public class PostService {
 //        }
 
 
-        List<PostDetailDto> postDetailDtos = convertToPostDetailDto(userId, postList);
+//        List<PostDetailDto> postDetailDtos = convertToPostDetailDto(userId, postList);
 
         success.setSuccess(true);
-        success.setResult(postDetailDtos);
+//        success.setResult(postDetailDtos);
         return success;
+    }
+
+    private List<PostDto> convertObjectToPostDto(Optional<Object[]> postList, Optional<Object[]> getCnts) {
+        /**
+         * @Query로 구현할 계획
+         * 해당 포스트를 좋아하는 계정에 대한 isLike 체크도 추후에 필요함.
+         */
+        List<PostDto> postDtoList = new ArrayList<>();
+
+        if(!ObjectUtils.isEmpty(postList)) {
+            for(Object post : postList.get()) {
+                //dto mapping
+            }
+        }
+
+        return postDtoList;
     }
 
     private List<PostDetailDto> convertToPostDetailDto(String userId, List<Post> postList) {
