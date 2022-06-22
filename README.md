@@ -3,17 +3,22 @@
 ### JAVA DOCS for REQUEST API
 - https://junjunwon.github.io/MyPofolgram-back/
 
-### * host server
-#### HEROKU CLOUD APPLICATION PLATFORM
-##### Address : https://myportfoliogram.herokuapp.com/
-### * DATABASE
-#### HEROKU Postgresql
-### * BackEnd Was Server
-#### SpringBoot 2.6.4
-### * Java Jdk 
-#### Java Open Jdk 11.0.2
-### * FrontEnd 
-#### Vue
+## 기술 스택
+#### 프론트엔드
+- Node.js : v17.8.0
+- @vue/cli : 4.5.15
+- vue : v2
+- Javascript ES6
+- CSS / HTML
+#### 백엔드
+- SringBoot : v2.6.4
+- Java : Java Open Jdk 11.0.2
+#### 데이터베이스
+- heroku-PostgreSql
+#### Cloud
+- Heroku : deploy Backend server
+- AWS S3 : storing images
+
 ### DB table diagram (Still working on it to make it better)
 
 <img width="789" alt="dialgram" src="https://user-images.githubusercontent.com/45681336/158583301-46dcbe66-3562-4925-812c-66f2de198dad.png">
