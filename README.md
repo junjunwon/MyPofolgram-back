@@ -5,7 +5,7 @@
 - https://junjunwon.github.io/MyPofolgram-back/
 
 
-## 프론트엔드 깃허브 주소 (Front-end github link)
+## Front-End 깃허브 주소 (Front-end github link)
 https://github.com/junjunwon/junjunwon-MyPofolgram-front
 
 
