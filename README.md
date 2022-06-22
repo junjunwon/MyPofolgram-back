@@ -19,7 +19,7 @@
 - Heroku : deploy Backend server
 - AWS S3 : storing images
 
-### DB table diagram (Still working on it to make it better)
+## DB table diagram (Still working on it to make it better)
 
 <img width="789" alt="dialgram" src="https://user-images.githubusercontent.com/45681336/158583301-46dcbe66-3562-4925-812c-66f2de198dad.png">
 
