@@ -1,5 +1,13 @@
 # MyPofolgram-back
 
+## Summary
+- Cloning Instagram Project
+- Developed JWT Token for login authorization on front-end and back-end.
+- Standardized Structure of Vuex and separated into vuex modules to manage dynamically
+- Designed and developed web pages using HTML, Javascript, CSS
+- Build REST APIs and configure spring security to block unauthorized users from client-side.
+- Developed service layers and have database connection using JPA
+- Set up Heroku server to deploy back-end application and AWS S3 server for storing images
 
 ### JAVA DOCS for REQUEST API
 - https://junjunwon.github.io/MyPofolgram-back/
